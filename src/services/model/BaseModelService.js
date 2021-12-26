@@ -22,7 +22,7 @@ class BaseModelService {
   }
 
   findManyBy(fields) {
-    return this.model.findManyBy(fields);
+    return this.model.find(fields);
   }
 
   // TODO: how we are going to hide user credentials when populating? Like passwords and other stuff
