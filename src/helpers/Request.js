@@ -9,8 +9,8 @@ class Request {
   }
 
   getData() {
-    const { query, body } = this.getRequest();
-    return { ...body, ...query };
+    const { body, params, query } = this.getRequest();
+    return { ...body, ...params, ...query };
   }
 
   getPath() {
