@@ -9,7 +9,6 @@ async function handleValidationResultMiddleware(req, res, next) {
   const { errors } = result;
 
   if (errors.length) {
-    console.log(errors);
     const firstErrorMessage = errors[0].msg;
     next(new BadRequestError(firstErrorMessage));
   }
