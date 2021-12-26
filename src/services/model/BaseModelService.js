@@ -1,6 +1,10 @@
+import filterObjectFields from "helpers/utils/filterObjectFields";
+
 class BaseModelService {
-  constructor(model) {
+  constructor(model, publicFields = {}, returnFields = {}) {
     this.model = model;
+    this.publicFields = publicFields;
+    this.returnFields = returnFields;
   }
 
   create(fields) {
@@ -30,6 +34,13 @@ class BaseModelService {
     });
 
     return query;
+  }
+
+  getReturnFields(additionalFields = {}) {
+    return {
+      ...this.returnFields,
+      ...filterObjectFields(additionalFields, this.publicFields),
+    };
   }
 
   updateById(id, fields) {

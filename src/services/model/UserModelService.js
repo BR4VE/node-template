@@ -6,7 +6,7 @@ import UserModel from "models/UserModel";
 
 import filterObjectFields from "helpers/utils/filterObjectFields";
 
-const AllPublicFields = {
+const PublicFields = {
   _id: true,
   email: true,
   imageUrl: true,
@@ -20,11 +20,6 @@ const ReturnFields = {
   name: true,
   urlName: true,
 };
-
-const getSelectFields = (additionalFields) => ({
-  ...ReturnFields,
-  ...filterObjectFields(additionalFields, AllPublicFields),
-});
 
 class UserModelService extends BaseModelService {
   async comparePasswords(userId, password) {
@@ -45,7 +40,7 @@ class UserModelService extends BaseModelService {
     const userFields = { ...data, password: hashedPassword, urlName };
 
     const user = await super.create(userFields);
-    const filteredUser = filterObjectFields(user.toObject(), AllPublicFields);
+    const filteredUser = filterObjectFields(user.toObject(), this.publicFields);
 
     await EventEmitter.emit(EventEmitter.eventTypes.userCreated, {
       user: filteredUser,
@@ -55,17 +50,21 @@ class UserModelService extends BaseModelService {
   }
 
   findByEmail(email, additionalFields = {}) {
-    return this.findBy({ email }).select(getSelectFields(additionalFields));
+    return this.findBy({ email }).select(
+      this.getReturnFields(additionalFields)
+    );
   }
 
   findById(userId, additionalFields = {}) {
-    return super.findById(userId).select(getSelectFields(additionalFields));
+    return super
+      .findById(userId)
+      .select(this.getReturnFields(additionalFields));
   }
 
   findManyBy(searchFields, sortKey, additionalFields = {}) {
     const query = super
       .findManyBy(searchFields)
-      .select(getSelectFields(additionalFields));
+      .select(this.getReturnFields(additionalFields));
 
     return sortKey ? query.sort({ [sortKey]: 1 }) : query;
   }
@@ -96,4 +95,4 @@ class UserModelService extends BaseModelService {
   }
 }
 
-export default new UserModelService(UserModel);
+export default new UserModelService(UserModel, PublicFields, ReturnFields);
