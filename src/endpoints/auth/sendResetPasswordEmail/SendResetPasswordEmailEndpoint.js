@@ -1,10 +1,10 @@
 import ErrorMessages from "helpers/utils/ErrorMessages";
-import SendResetPasswordEmailController from "endpoints/auth/sendResetPasswordEmail/SendResetPasswordEmailController";
-import SendResetPasswordEmailCredentialChecks from "endpoints/auth/sendResetPasswordEmail/SendResetPasswordEmailCredentialChecks";
+import SendResetPasswordEmailEndpointController from "endpoints/auth/sendResetPasswordEmail/SendResetPasswordEmailEndpointController";
+import SendResetPasswordEmailEndpointCredentialChecks from "endpoints/auth/sendResetPasswordEmail/SendResetPasswordEmailEndpointCredentialChecks";
 
 export default {
-  controller: SendResetPasswordEmailController,
-  credentialChecks: SendResetPasswordEmailCredentialChecks,
+  controller: SendResetPasswordEmailEndpointController,
+  credentialChecks: SendResetPasswordEmailEndpointCredentialChecks,
   method: "post",
   path: "/auth/send-reset-password-email",
   validation: {
