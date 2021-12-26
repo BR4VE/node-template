@@ -13,7 +13,7 @@ const configPassport = (app) => {
   };
 
   const strategy = new Strategy(jwtOptions, async (payload, done) => {
-    const user = await UserModelService.findById(payload.userId);
+    const user = await UserModelService.findOneById(payload.userId);
 
     if (user) {
       done(null, user);

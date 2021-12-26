@@ -41,7 +41,7 @@ class VerificationModelService extends BaseModelService {
   }
 
   findActiveVerification(user, type = "email") {
-    return this.findBy({
+    return this.findOneBy({
       expireAt: { $gte: new Date() },
       type,
       userId: user._id,
@@ -50,7 +50,7 @@ class VerificationModelService extends BaseModelService {
   }
 
   verify(verificationId) {
-    return this.updateById(verificationId, {
+    return this.updateOneById(verificationId, {
       verified: true,
       verifiedAt: new Date(),
     });

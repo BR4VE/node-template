@@ -7,7 +7,7 @@ import LoginEndpointController from "endpoints/auth/login/LoginEndpointControlle
 export default class SignupEndpointController {
   static async respond(request) {
     const { email, name, password, phoneNumber } = request.getData();
-    const existingUser = await UserModelService.findByEmail(email);
+    const existingUser = await UserModelService.findOneByEmail(email);
 
     if (existingUser) {
       throw new ConflictError(ErrorMessages.alreadyExists("User"));

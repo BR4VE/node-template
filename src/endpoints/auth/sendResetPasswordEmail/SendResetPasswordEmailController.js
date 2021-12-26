@@ -6,7 +6,7 @@ import VerificationModelService from "services/model/VerificationModelService";
 export default class SendResetPasswordEmailController {
   static async respond(request) {
     const { email } = request.getData();
-    const user = await UserModelService.findByEmail(email);
+    const user = await UserModelService.findOneByEmail(email);
 
     if (!user) {
       throw new BadRequestError(ErrorMessages.invalid("Email"));

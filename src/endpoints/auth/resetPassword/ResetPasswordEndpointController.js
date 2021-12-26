@@ -8,7 +8,7 @@ import VerificationModelService from "services/model/VerificationModelService";
 export default class ResetPasswordEndpointController {
   static async respond(request) {
     const { email, password, verificationCode } = request.getData();
-    const user = await UserModelService.findByEmail(email);
+    const user = await UserModelService.findOneByEmail(email);
 
     if (!user) {
       throw new AuthError(ErrorMessages.invalid("Email"));

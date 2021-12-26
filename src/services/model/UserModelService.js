@@ -52,15 +52,15 @@ class UserModelService extends BaseModelService {
     return filteredUser;
   }
 
-  findByEmail(email, additionalFields = {}) {
-    return this.findBy({ email }).select(
+  findOneByEmail(email, additionalFields = {}) {
+    return this.findOneBy({ email }).select(
       this.getReturnFields(additionalFields)
     );
   }
 
-  findById(userId, additionalFields = {}) {
+  findOneById(userId, additionalFields = {}) {
     return super
-      .findById(userId)
+      .findOneById(userId)
       .select(this.getReturnFields(additionalFields));
   }
 
@@ -74,12 +74,12 @@ class UserModelService extends BaseModelService {
 
   updatePassword(userId, password) {
     const hashedPassword = HashService.hash(password);
-    return this.updateById(userId, { password: hashedPassword });
+    return this.updateOneById(userId, { password: hashedPassword });
   }
 
   async _findAvailableUrlNameByUserName(userName) {
     const slugifiedUserName = SlugService.slugify(userName);
-    const userWithBiggestUrlName = await this.findBy({
+    const userWithBiggestUrlName = await this.findOneBy({
       urlName: { $regex: slugifiedUserName },
     })
       .select({ urlName: 1 })

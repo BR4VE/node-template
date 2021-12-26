@@ -13,11 +13,11 @@ class BaseModelService {
     return instance.save();
   }
 
-  findBy(fields) {
+  findOneBy(fields) {
     return this.model.findOne(fields);
   }
 
-  findById(id) {
+  findOneById(id) {
     return this.model.findById(id);
   }
 
@@ -26,7 +26,7 @@ class BaseModelService {
   }
 
   // TODO: how we are going to hide user credentials when populating? Like passwords and other stuff
-  findByIdWith(id, populateArr = []) {
+  findOneByIdWith(id, populateArr = []) {
     let query = this.findById(id);
 
     populateArr.forEach((field) => {
@@ -43,15 +43,15 @@ class BaseModelService {
     };
   }
 
-  updateById(id, fields) {
+  updateOneById(id, fields) {
     return this.model.updateOne({ _id: id }, { $set: fields });
   }
 
-  updateBy(matchFields, updateFields) {
+  updateOneBy(matchFields, updateFields) {
     return this.model.updateOne(matchFields, { $set: updateFields });
   }
 
-  deleteById(id) {
+  deleteOneById(id) {
     return this.model.deleteOne({ _id: id });
   }
 
