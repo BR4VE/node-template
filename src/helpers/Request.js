@@ -1,4 +1,3 @@
-import LogModelService from "services/model/LogModelService";
 import Logger from "helpers/Logger";
 import Environment from "infra/Environment";
 
@@ -41,13 +40,6 @@ class Request {
       response,
       status: this._status,
       userId: user?._id,
-    });
-
-    LogModelService.create({
-      ip,
-      path,
-      userId: user?._id,
-      type: "request",
     });
   }
 

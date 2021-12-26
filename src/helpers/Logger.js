@@ -1,3 +1,5 @@
+import LogModelService from "services/model/LogModelService";
+
 /* eslint-disable no-console */
 import hideObjectFields from "helpers/utils/hideObjectFields";
 
@@ -5,7 +7,15 @@ import hideObjectFields from "helpers/utils/hideObjectFields";
 const HiddenFields = ["password"];
 
 class Logger {
-  static logRequest({ event, ip, path, request, response, status, userId }) {
+  static async logRequest({
+    event,
+    ip,
+    path,
+    request,
+    response,
+    status,
+    userId,
+  }) {
     const stringifiedRequest = JSON.stringify(
       hideObjectFields(request, HiddenFields)
     );
@@ -15,6 +25,13 @@ class Logger {
     console.log(
       `[${new Date().toISOString()}] ${event} ${userId} ${path} ${status} ${ip} ${stringifiedRequest} ${stringifiedResponse}`
     );
+
+    await LogModelService.create({
+      ip,
+      path,
+      userId,
+      type: "request",
+    });
   }
 }
 
