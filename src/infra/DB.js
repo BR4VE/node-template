@@ -11,6 +11,7 @@ class DB {
   connect() {
     this.dbApi.connect(this.dbUri, {
       useCreateIndex: true,
+      useFindAndModify: false,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
