@@ -4,7 +4,7 @@ import HashService from "services/3rd/HashService";
 import SlugService from "services/3rd/SlugService";
 import UserModel from "models/UserModel";
 
-import filterObjectFields from "helpers/utils/filterObjectFields";
+import ObjectUtils from "helpers/utils/ObjectUtils";
 
 const PublicFields = {
   _id: true,
@@ -40,7 +40,10 @@ class UserModelService extends BaseModelService {
     const userFields = { ...data, password: hashedPassword, urlName };
 
     const user = await super.create(userFields);
-    const filteredUser = filterObjectFields(user.toObject(), this.publicFields);
+    const filteredUser = ObjectUtils.filterObjectFields(
+      user.toObject(),
+      this.publicFields
+    );
 
     await EventEmitter.emit(EventEmitter.eventTypes.userCreated, {
       user: filteredUser,

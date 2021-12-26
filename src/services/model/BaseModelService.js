@@ -1,4 +1,4 @@
-import filterObjectFields from "helpers/utils/filterObjectFields";
+import ObjectUtils from "helpers/utils/ObjectUtils";
 
 class BaseModelService {
   constructor(model, publicFields = {}, returnFields = {}) {
@@ -39,7 +39,7 @@ class BaseModelService {
   getReturnFields(additionalFields = {}) {
     return {
       ...this.returnFields,
-      ...filterObjectFields(additionalFields, this.publicFields),
+      ...ObjectUtils.filterObjectFields(additionalFields, this.publicFields),
     };
   }
 
