@@ -21,6 +21,14 @@ class BaseModelService {
     return this.model.findById(id);
   }
 
+  findOneByIdAndUpdate(id, fields = {}) {
+    return this.model.findOneAndUpdate(
+      { _id: id },
+      { $set: fields },
+      { new: true }
+    );
+  }
+
   findManyBy(fields) {
     return this.model.find(fields);
   }
