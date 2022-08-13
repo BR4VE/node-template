@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 import Environment from "infra/Environment";
 import ExceptionHandlerService from "services/3rd/ExceptionHandlerService";
+import LoggerService from "services/composite/LoggerService";
 
 class DB {
   constructor(dbUri, dbAPi) {
@@ -19,12 +20,10 @@ class DB {
       });
     } catch (error) {
       ExceptionHandlerService.captureException(error);
-      console.log("Cannot connect to DB.");
+      LoggerService.logToConsole("Cannot connect to DB.");
     }
 
-    const { connection } = this.dbApi;
-    // TODO: change these console logs with logger
-    connection.on("open", () => console.log("Connected to DB."));
+    LoggerService.logToConsole("Connected to DB.");
   }
 }
 

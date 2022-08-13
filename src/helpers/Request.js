@@ -1,5 +1,5 @@
-import Logger from "helpers/Logger";
 import Environment from "infra/Environment";
+import LoggerService from "services/composite/LoggerService";
 
 class Request {
   constructor(request, response) {
@@ -32,7 +32,7 @@ class Request {
 
     const { ip, path, user } = this.getRequest();
     // Logging to the console for cloud providers
-    Logger.logRequest({
+    LoggerService.logRequest({
       event: "request_responded",
       ip,
       path,

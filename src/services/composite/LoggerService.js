@@ -1,11 +1,15 @@
 import LogModelService from "services/model/LogModelService";
-import ObjectUtils from "./utils/ObjectUtils";
+import ObjectUtils from "helpers/utils/ObjectUtils";
 
 /* eslint-disable no-console */
 // TODO: update hidden fields
 const HiddenFields = ["password"];
 
-class Logger {
+class LoggerService {
+  static logToConsole(message) {
+    console.log(message);
+  }
+
   static async logRequest({
     event,
     ip,
@@ -21,7 +25,8 @@ class Logger {
     const stringifiedResponse = JSON.stringify(
       ObjectUtils.hideObjectFields(response, HiddenFields)
     );
-    console.log(
+
+    this.logToConsole(
       `[${new Date().toISOString()}] ${event} ${userId} ${path} ${status} ${ip} ${stringifiedRequest} ${stringifiedResponse}`
     );
 
@@ -34,4 +39,4 @@ class Logger {
   }
 }
 
-export default Logger;
+export default LoggerService;
