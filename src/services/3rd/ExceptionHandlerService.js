@@ -19,6 +19,11 @@ class ExceptionHandlerService {
     // eslint-disable-next-line camelcase
     { _id: id, email, ip: ip_address, name: username } = {}
   ) {
+    // Throw exceptions in the dev mode
+    if (!Environment.isProduction()) {
+      throw exception;
+    }
+
     this.api.captureException(exception, {
       tags: {
         pathType,

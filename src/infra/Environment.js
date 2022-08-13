@@ -12,6 +12,10 @@ class Environment {
     return this.NODE_ENV === "development";
   }
 
+  isProduction() {
+    return this.NODE_ENV === "production";
+  }
+
   _setEnvVariables() {
     this.NODE_ENV = process.env.NODE_ENV;
 

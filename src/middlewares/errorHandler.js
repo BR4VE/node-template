@@ -1,5 +1,4 @@
 import CustomError from "errors/CustomError";
-import Environment from "infra/Environment";
 import ErrorMessages from "helpers/utils/ErrorMessages";
 import ExceptionHandlerService from "services/3rd/ExceptionHandlerService";
 import Request from "helpers/Request";
@@ -10,10 +9,6 @@ export default async (error, req, res, next) => {
   let err = error;
 
   if (!(err instanceof CustomError)) {
-    if (Environment.isDev()) {
-      throw err;
-    }
-
     const data = request.getData();
     const { ip, path, user = {} } = request.getRequest();
 
