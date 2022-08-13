@@ -33,17 +33,6 @@ class BaseModelService {
     return this.model.find(fields);
   }
 
-  // TODO: how we are going to hide user credentials when populating? Like passwords and other stuff
-  findOneByIdWith(id, populateArr = []) {
-    let query = this.findById(id);
-
-    populateArr.forEach((field) => {
-      query = query.populate(field);
-    });
-
-    return query;
-  }
-
   getReturnFields(additionalFields = {}) {
     return {
       ...this.returnFields,

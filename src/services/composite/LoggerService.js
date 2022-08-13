@@ -2,7 +2,6 @@ import LogModelService from "services/model/LogModelService";
 import ObjectUtils from "helpers/utils/ObjectUtils";
 
 /* eslint-disable no-console */
-// TODO: update hidden fields
 const HiddenFields = ["password"];
 
 class LoggerService {

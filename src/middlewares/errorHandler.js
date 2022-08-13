@@ -18,7 +18,6 @@ export default async (error, req, res, next) => {
     ExceptionHandlerService.captureException(err, path, "endpoint", user, data);
 
     err = new ServiceUnavailableError(ErrorMessages.serviceUnavailable());
-    // TODO: Check sentry here err.message? event emitters?
   }
 
   const { status } = err;
