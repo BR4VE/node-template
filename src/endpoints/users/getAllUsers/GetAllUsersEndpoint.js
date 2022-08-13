@@ -12,7 +12,7 @@ export default {
     sort: {
       in: ["query"],
       isIn: {
-        options: ["name", "createdAt"],
+        options: [["name", "createdAt"]],
         errorMessage: ErrorMessages.invalid("Sort"),
       },
     },
