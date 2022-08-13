@@ -1,8 +1,15 @@
 import ExceptionHandlerService from "services/3rd/ExceptionHandlerService";
-import Environment from "infra/Environment";
 
 const EventTypes = {
   userCreated: "user.created",
+};
+
+const executeListeners = async ({ data = {}, eventName, listeners = [] }) => {
+  try {
+    await Promise.all(listeners.map((listener) => listener(data)));
+  } catch (error) {
+    ExceptionHandlerService.captureException(error, eventName, "event");
+  }
 };
 
 class EventEmitter {
@@ -26,23 +33,15 @@ class EventEmitter {
       return;
     }
 
-    try {
-      const blockingListeners = [];
-      eventListeners.forEach((listener) => {
-        const callbackResult = listener.callback(data);
-        if (listener.options.blocking) {
-          blockingListeners.push(callbackResult);
-        }
-      });
+    const blockingListeners = eventListeners.filter(
+      (listener) => !!listener?.options?.blocking
+    );
+    const nonBlockingListeners = eventListeners.filter(
+      (listener) => !listener?.options?.blocking
+    );
 
-      await Promise.all(blockingListeners);
-    } catch (error) {
-      if (Environment.isDev()) {
-        throw error;
-      }
-
-      ExceptionHandlerService.captureException(error, eventName, "event");
-    }
+    executeListeners({ data, eventName, listeners: nonBlockingListeners });
+    await executeListeners({ data, eventName, listeners: blockingListeners });
   }
 }
 
