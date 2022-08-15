@@ -1,6 +1,6 @@
 import slug from "slug";
 
-class SlugService {
+class SlugManager {
   constructor(api) {
     this.api = api;
     this.separator = "-";
@@ -11,4 +11,4 @@ class SlugService {
   }
 }
 
-export default new SlugService(slug);
+export default new SlugManager(slug);

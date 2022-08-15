@@ -1,6 +1,6 @@
 import bcryptjs from "bcryptjs";
 
-class HashService {
+class HashManager {
   constructor(api) {
     this.api = api;
   }
@@ -15,4 +15,4 @@ class HashService {
   }
 }
 
-export default new HashService(bcryptjs);
+export default new HashManager(bcryptjs);

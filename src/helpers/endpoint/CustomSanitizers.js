@@ -1,7 +1,7 @@
-import PhoneConverterService from "services/3rd/PhoneConverterService";
+import PhoneManager from "helpers/PhoneManager";
 
 export default {
   phoneNumber: {
-    options: (phoneNumber) => PhoneConverterService.convertNumber(phoneNumber),
+    options: (phoneNumber) => PhoneManager.convertNumber(phoneNumber),
   },
 };

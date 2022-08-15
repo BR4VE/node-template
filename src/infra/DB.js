@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import Environment from "infra/Environment";
-import ExceptionHandlerService from "services/3rd/ExceptionHandlerService";
+import ExceptionHandler from "helpers/ExceptionHandler";
 import LoggerService from "services/LoggerService";
 
 class DB {
@@ -19,7 +19,7 @@ class DB {
         useUnifiedTopology: true,
       });
     } catch (error) {
-      ExceptionHandlerService.captureException(error);
+      ExceptionHandler.captureException(error);
       LoggerService.logToConsole("Cannot connect to DB.");
     }
 

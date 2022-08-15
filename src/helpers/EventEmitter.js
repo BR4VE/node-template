@@ -1,4 +1,4 @@
-import ExceptionHandlerService from "services/3rd/ExceptionHandlerService";
+import ExceptionHandler from "helpers/ExceptionHandler";
 
 const EventTypes = {
   userCreated: "user.created",
@@ -8,7 +8,7 @@ const executeListeners = async ({ data = {}, eventName, listeners = [] }) => {
   try {
     await Promise.all(listeners.map((listener) => listener(data)));
   } catch (error) {
-    ExceptionHandlerService.captureException(error, eventName, "event");
+    ExceptionHandler.captureException(error, eventName, "event");
   }
 };
 

@@ -1,6 +1,6 @@
 import AuthError from "errors/AuthError";
 import ErrorMessages from "helpers/utils/ErrorMessages";
-import JWTService from "services/3rd/JWTService";
+import JWTManager from "helpers/JWTManager";
 import UserModel from "models/UserModel";
 import UserService from "services/UserService";
 
@@ -22,7 +22,7 @@ export default class LoginEndpointController {
       throw new AuthError(ErrorMessages.invalid("Email or Password"));
     }
 
-    const authenticationToken = JWTService.signUserToken(user);
+    const authenticationToken = JWTManager.signUserToken(user);
 
     request.respondJSON({
       authenticationToken,

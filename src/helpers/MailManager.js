@@ -18,7 +18,7 @@ function getVerificationTemplateIdByType(type) {
   }
 }
 
-class MailService {
+class MailManager {
   constructor(api) {
     this.api = api;
     this.api.setApiKey(Environment.mailServiceAPIKey);
@@ -45,4 +45,4 @@ class MailService {
   }
 }
 
-export default new MailService(sgMail);
+export default new MailManager(sgMail);

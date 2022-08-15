@@ -3,7 +3,7 @@ import randToken from "rand-token";
 const DefaultTokenSize = 6;
 const Numbers = "0123456789";
 
-class TokenService {
+class TokenManager {
   constructor(api) {
     this.api = api;
   }
@@ -13,4 +13,4 @@ class TokenService {
   }
 }
 
-export default new TokenService(randToken);
+export default new TokenManager(randToken);

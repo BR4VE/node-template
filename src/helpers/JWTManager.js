@@ -4,7 +4,7 @@ import Environment from "infra/Environment";
 
 const YEAR_AS_SECONDS = 365 * 24 * 60 * 60 * 1000;
 
-class JWTService {
+class JWTManager {
   constructor(api) {
     this.api = api;
   }
@@ -17,4 +17,4 @@ class JWTService {
   }
 }
 
-export default new JWTService(jwt);
+export default new JWTManager(jwt);

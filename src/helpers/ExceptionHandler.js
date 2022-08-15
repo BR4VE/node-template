@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/node";
 
 import Environment from "infra/Environment";
 
-class ExceptionHandlerService {
+class ExceptionHandler {
   constructor(api) {
     this.api = api;
 
@@ -39,4 +39,4 @@ class ExceptionHandlerService {
   }
 }
 
-export default new ExceptionHandlerService(Sentry);
+export default new ExceptionHandler(Sentry);

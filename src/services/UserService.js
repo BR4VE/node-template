@@ -1,7 +1,7 @@
 import EventEmitter, { EventTypes } from "helpers/EventEmitter";
-import HashService from "services/3rd/HashService";
+import HashManager from "helpers/HashManager";
 import UserModel from "models/UserModel";
-import SlugService from "services/3rd/SlugService";
+import SlugManager from "helpers/SlugManager";
 
 class UserService {
   static async comparePasswords(userId, password) {
@@ -10,12 +10,12 @@ class UserService {
       return false;
     }
 
-    return HashService.compare(password, user.password);
+    return HashManager.compare(password, user.password);
   }
 
   static async createUser(data) {
     const urlName = await this.findAvailableUrlName(data.name);
-    const hashedPassword = HashService.hash(data.password);
+    const hashedPassword = HashManager.hash(data.password);
     const userFields = { ...data, password: hashedPassword, urlName };
 
     const user = await UserModel.create(userFields);
@@ -26,7 +26,7 @@ class UserService {
   }
 
   static async findAvailableUrlName(userName) {
-    const slugifiedUserName = SlugService.slugify(userName);
+    const slugifiedUserName = SlugManager.slugify(userName);
     const user = await UserModel.findOneByUrlName(slugifiedUserName);
 
     if (!user) {
@@ -34,13 +34,13 @@ class UserService {
     }
 
     const urlNumber =
-      Number(user.urlName.split(SlugService.separator).reverse()[0]) || 0;
+      Number(user.urlName.split(SlugManager.separator).reverse()[0]) || 0;
 
-    return `${slugifiedUserName}${SlugService.separator}${urlNumber + 1}`;
+    return `${slugifiedUserName}${SlugManager.separator}${urlNumber + 1}`;
   }
 
   static updatePassword(userId, password) {
-    const hashedPassword = HashService.hash(password);
+    const hashedPassword = HashManager.hash(password);
     return this.updateOneById(userId, { password: hashedPassword });
   }
 }

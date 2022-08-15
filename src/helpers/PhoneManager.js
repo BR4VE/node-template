@@ -1,6 +1,6 @@
 import phone from "phone";
 
-class PhoneConverterService {
+class PhoneManager {
   constructor(api) {
     this.api = api;
   }
@@ -11,4 +11,4 @@ class PhoneConverterService {
   }
 }
 
-export default new PhoneConverterService(phone);
+export default new PhoneManager(phone);
