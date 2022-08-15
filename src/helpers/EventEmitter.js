@@ -1,3 +1,4 @@
+import Environment from "infra/Environment";
 import ExceptionHandler from "helpers/ExceptionHandler";
 
 const EventTypes = {
@@ -6,7 +7,7 @@ const EventTypes = {
 
 const executeListeners = async ({ data = {}, eventName, listeners = [] }) => {
   try {
-    await Promise.all(listeners.map((listener) => listener(data)));
+    await Promise.all(listeners.map((listener) => listener.callback(data)));
   } catch (error) {
     ExceptionHandler.captureException(error, eventName, "event");
   }
@@ -29,6 +30,12 @@ class EventEmitter {
     const eventListeners = this.eventListeners[eventName];
 
     if (!eventListeners || !eventListeners.length) {
+      return;
+    }
+
+    // Await all the tests in test mode
+    if (Environment.isTest()) {
+      await executeListeners({ data, eventName, listeners: eventListeners });
       return;
     }
 
