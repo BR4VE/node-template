@@ -12,6 +12,10 @@ class Environment {
     return this.NODE_ENV === "development";
   }
 
+  isTest() {
+    return this.NODE_ENV === "test";
+  }
+
   isProduction() {
     return this.NODE_ENV === "production";
   }
