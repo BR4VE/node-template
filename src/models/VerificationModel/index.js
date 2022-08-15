@@ -1,4 +1,5 @@
 import BaseModel from "models/BaseModel";
+import VerificationSchema from "models/VerificationModel/VerificationSchema";
 
 class VerificationModel extends BaseModel {
   deleteUnverifiedVerifications(user, type = "email") {
@@ -22,4 +23,4 @@ class VerificationModel extends BaseModel {
   }
 }
 
-export default new VerificationModel();
+export default new VerificationModel({ schema: VerificationSchema });

@@ -27,7 +27,7 @@ class VerificationService {
   }
 
   // Event listeners
-  onUserCreated = ({ user }) => this.create(user, "email");
+  static onUserCreated = ({ user }) => this.create(user, "email");
 }
 
 // Event Listeners
