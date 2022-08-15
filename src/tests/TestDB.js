@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
+import TestDataFactory from "tests/TestDataFactory";
 
-class TestDatabase {
+class TestDB {
   constructor() {
     this.memoryServer = null;
     this.api = mongoose;
     this.isInitialized = false;
     this.needsCleanup = true;
+    this.testDataFactory = TestDataFactory;
+
+    this.testData = {};
   }
 
   // called once before all tests
@@ -45,6 +49,15 @@ class TestDatabase {
 
     await Promise.all(promises);
   }
+
+  getTestData() {
+    return this.testData;
+  }
+
+  async setTestData(data) {
+    await this.clearDatabase();
+    this.testData = await this.testDataFactory.createInstances(data);
+  }
 }
 
-export default new TestDatabase();
+export default new TestDB();
