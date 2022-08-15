@@ -1,5 +1,5 @@
 import Environment from "infra/Environment";
-import LoggerService from "services/composite/LoggerService";
+import LoggerService from "services/LoggerService";
 
 class Request {
   constructor(request, response) {

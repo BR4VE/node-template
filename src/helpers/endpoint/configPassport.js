@@ -4,7 +4,7 @@ import passport from "passport";
 import AuthError from "errors/AuthError";
 import Environment from "infra/Environment";
 import ErrorMessages from "helpers/utils/ErrorMessages";
-import UserModelService from "services/model/UserModelService";
+import UserModel from "models/UserModel";
 
 const configPassport = (app) => {
   const jwtOptions = {
@@ -13,7 +13,7 @@ const configPassport = (app) => {
   };
 
   const strategy = new Strategy(jwtOptions, async (payload, done) => {
-    const user = await UserModelService.findOneById(payload.userId);
+    const user = await UserModel.findOneById(payload.userId);
 
     if (user) {
       done(null, user);

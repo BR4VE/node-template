@@ -1,4 +1,4 @@
-import UserModelService from "services/model/UserModelService";
+import UserService from "services/UserService";
 
 class TestDataFactory {
   static async createInstances({ users }) {
@@ -19,7 +19,7 @@ class TestDataFactory {
     }
 
     const promises = new Array(userCount).fill(null).map(async (c, i) =>
-      UserModelService.create({
+      UserService.createUser({
         email: `test_email${i}@test.com`,
         name: `Test User ${i}`,
         password: `test_password_${i}`,

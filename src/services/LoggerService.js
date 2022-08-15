@@ -1,4 +1,4 @@
-import LogModelService from "services/model/LogModelService";
+import LogModel from "models/LogModel";
 import ObjectUtils from "helpers/utils/ObjectUtils";
 
 /* eslint-disable no-console */
@@ -29,7 +29,7 @@ class LoggerService {
       `[${new Date().toISOString()}] ${event} ${userId} ${path} ${status} ${ip} ${stringifiedRequest} ${stringifiedResponse}`
     );
 
-    await LogModelService.create({
+    await LogModel.create({
       ip,
       path,
       userId,

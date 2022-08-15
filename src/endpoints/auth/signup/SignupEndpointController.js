@@ -1,19 +1,20 @@
 import ConflictError from "errors/ConflictError";
 import ErrorMessages from "helpers/utils/ErrorMessages";
 
-import UserModelService from "services/model/UserModelService";
 import LoginEndpointController from "endpoints/auth/login/LoginEndpointController";
+import UserModel from "models/UserModel";
+import UserService from "services/UserService";
 
 export default class SignupEndpointController {
   static async respond(request) {
     const { email, name, password, phoneNumber } = request.getData();
-    const existingUser = await UserModelService.findOneByEmail(email);
+    const existingUser = await UserModel.findOneByEmail(email);
 
     if (existingUser) {
       throw new ConflictError(ErrorMessages.alreadyExists("User"));
     }
 
-    await UserModelService.create({
+    await UserService.createUser({
       email,
       name,
       password,

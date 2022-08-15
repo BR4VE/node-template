@@ -1,7 +1,7 @@
 import http from "http";
 
 import Environment from "infra/Environment";
-import LoggerService from "services/composite/LoggerService";
+import LoggerService from "services/LoggerService";
 import WebServer from "server/WebServer";
 
 const server = http.createServer(WebServer());

@@ -21,6 +21,4 @@ const VerificationSchema = Schema(
   { timestamps: true }
 );
 
-const VerificationModel = mongoose.model("Verification", VerificationSchema);
-
-export default VerificationModel;
+export default { name: "Verification", target: VerificationSchema };

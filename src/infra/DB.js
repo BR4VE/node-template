@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import Environment from "infra/Environment";
 import ExceptionHandlerService from "services/3rd/ExceptionHandlerService";
-import LoggerService from "services/composite/LoggerService";
+import LoggerService from "services/LoggerService";
 
 class DB {
   constructor(dbUri, dbAPi) {

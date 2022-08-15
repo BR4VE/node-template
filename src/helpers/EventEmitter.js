@@ -14,7 +14,6 @@ const executeListeners = async ({ data = {}, eventName, listeners = [] }) => {
 
 class EventEmitter {
   constructor() {
-    this.eventTypes = EventTypes;
     this.eventListeners = {};
   }
 
@@ -44,5 +43,5 @@ class EventEmitter {
     await executeListeners({ data, eventName, listeners: blockingListeners });
   }
 }
-
+export { EventTypes };
 export default new EventEmitter();

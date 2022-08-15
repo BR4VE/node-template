@@ -1,20 +1,21 @@
 import AuthError from "errors/AuthError";
 import ErrorMessages from "helpers/utils/ErrorMessages";
 import NotFoundError from "errors/NotFoundError";
-import UserModelService from "services/model/UserModelService";
+import UserModel from "models/UserModel";
+import UserService from "services/UserService";
 import ValidationError from "errors/ValidationError";
-import VerificationModelService from "services/model/VerificationModelService";
+import VerificationModel from "models/VerificationModel";
 
 export default class ResetPasswordEndpointController {
   static async respond(request) {
     const { email, password, verificationCode } = request.getData();
-    const user = await UserModelService.findOneByEmail(email);
+    const user = await UserModel.findOneByEmail(email);
 
     if (!user) {
       throw new AuthError(ErrorMessages.invalid("Email"));
     }
 
-    const verification = await VerificationModelService.findActiveVerification(
+    const verification = await VerificationModel.findActiveVerification(
       user,
       "password"
     );
@@ -28,8 +29,8 @@ export default class ResetPasswordEndpointController {
     }
 
     await Promise.all([
-      VerificationModelService.verify(verification._id),
-      UserModelService.updatePassword(user._id, password),
+      VerificationModel.verify(verification._id),
+      UserService.updatePassword(user._id, password),
     ]);
 
     request.respond();
