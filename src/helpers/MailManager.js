@@ -21,7 +21,10 @@ function getVerificationTemplateIdByType(type) {
 class MailManager {
   constructor(api) {
     this.api = api;
-    this.api.setApiKey(Environment.mailServiceAPIKey);
+
+    if (Environment.isProduction()) {
+      this.api.setApiKey(Environment.mailServiceAPIKey);
+    }
   }
 
   async sendVerificationEmail(type, toEmail, { userName, verificationUrl }) {
@@ -41,7 +44,9 @@ class MailManager {
       dynamic_template_data: templateData,
     };
 
-    return this.api.send(msg);
+    if (Environment.isProduction()) {
+      await this.api.send(msg);
+    }
   }
 }
 
