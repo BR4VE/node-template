@@ -1,3 +1,4 @@
+import Environment from "infra/Environment";
 import LogModel from "models/LogModel";
 import ObjectUtils from "helpers/utils/ObjectUtils";
 
@@ -6,6 +7,10 @@ const HiddenFields = ["password"];
 
 class LoggerService {
   static logToConsole(message) {
+    if (Environment.isTest()) {
+      return;
+    }
+
     console.log(message);
   }
 

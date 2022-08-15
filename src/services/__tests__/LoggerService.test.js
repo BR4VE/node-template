@@ -11,7 +11,7 @@ describe("LoggerService", () => {
     jest.restoreAllMocks();
   });
 
-  it("Logs request", async () => {
+  test("Logs request", async () => {
     const user = TestDB.getTestData().users[0];
     const logData = {
       ip: "123123123",
