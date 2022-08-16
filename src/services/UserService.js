@@ -14,7 +14,7 @@ class UserService {
   }
 
   static async createUser(data) {
-    const urlName = await this.findAvailableUrlName(data.name);
+    const urlName = await this._findAvailableUrlName(data.name);
     const hashedPassword = HashManager.hash(data.password);
     const userFields = { ...data, password: hashedPassword, urlName };
 
@@ -25,7 +25,7 @@ class UserService {
     return user;
   }
 
-  static async findAvailableUrlName(userName) {
+  static async _findAvailableUrlName(userName) {
     const slugifiedUserName = SlugManager.slugify(userName);
     const user = await UserModel.findOneByUrlName(slugifiedUserName);
 
@@ -41,7 +41,7 @@ class UserService {
 
   static updatePassword(userId, password) {
     const hashedPassword = HashManager.hash(password);
-    return this.updateOneById(userId, { password: hashedPassword });
+    return UserModel.updateOneById(userId, { password: hashedPassword });
   }
 }
 
