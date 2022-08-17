@@ -1,6 +1,6 @@
 import CustomError from "errors/CustomError";
 import ErrorMessages from "helpers/utils/ErrorMessages";
-import ExceptionHandler from "helpers/ExceptionHandler";
+import ExceptionHandler from "helpers/3rd/ExceptionHandler";
 import Request from "helpers/Request";
 import ServiceUnavailableError from "errors/ServiceUnavailableError";
 

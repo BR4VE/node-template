@@ -1,4 +1,4 @@
-import MailManager from "helpers/MailManager";
+import MailManager from "helpers/3rd/MailManager";
 import TestDB from "tests/TestDB";
 import VerificationModel from "models/VerificationModel";
 import VerificationService from "services/VerificationService";

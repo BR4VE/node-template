@@ -1,8 +1,8 @@
 import DateUtils from "helpers/utils/DateUtils";
 import EventEmitter, { EventTypes } from "helpers/EventEmitter";
-import TokenService from "helpers/TokenManager";
+import TokenService from "helpers/3rd/TokenManager";
 import VerificationModel from "models/VerificationModel";
-import MailManager from "helpers/MailManager";
+import MailManager from "helpers/3rd/MailManager";
 
 class VerificationService {
   static async create(user, type = "email") {

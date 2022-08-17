@@ -1,4 +1,4 @@
-import PhoneManager from "helpers/PhoneManager";
+import PhoneManager from "helpers/3rd/PhoneManager";
 
 export default {
   phoneNumber: {

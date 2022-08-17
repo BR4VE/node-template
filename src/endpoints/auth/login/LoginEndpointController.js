@@ -1,6 +1,6 @@
 import AuthError from "errors/AuthError";
 import ErrorMessages from "helpers/utils/ErrorMessages";
-import JWTManager from "helpers/JWTManager";
+import JWTManager from "helpers/3rd/JWTManager";
 import UserModel from "models/UserModel";
 import UserService from "services/UserService";
 

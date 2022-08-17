@@ -1,5 +1,5 @@
 import Environment from "infra/Environment";
-import ExceptionHandler from "helpers/ExceptionHandler";
+import ExceptionHandler from "helpers/3rd/ExceptionHandler";
 
 const EventTypes = {
   userCreated: "user.created",

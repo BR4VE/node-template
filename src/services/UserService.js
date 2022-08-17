@@ -1,7 +1,7 @@
 import EventEmitter, { EventTypes } from "helpers/EventEmitter";
-import HashManager from "helpers/HashManager";
+import HashManager from "helpers/3rd/HashManager";
 import UserModel from "models/UserModel";
-import SlugManager from "helpers/SlugManager";
+import SlugManager from "helpers/3rd/SlugManager";
 
 class UserService {
   static async comparePasswords(userId, password) {
