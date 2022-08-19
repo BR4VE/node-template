@@ -1,25 +1,25 @@
 export default class ErrorMessages {
   static alreadyExists(prop) {
-    return `${prop} already exists`;
+    return { type: "already_exists", prop };
   }
 
   static invalid(prop) {
-    return `${prop} is invalid`;
+    return { type: "invalid", prop };
   }
 
-  static notAuthorized(action) {
-    return `User is not authorized to ${action}`;
+  static notAuthorized(prop) {
+    return { type: "unauthorized", prop };
   }
 
   static notExists(prop) {
-    return `${prop} doesn't exist`;
+    return { type: "not_exist", prop };
   }
 
   static required(prop) {
-    return `${prop} is required`;
+    return { type: "required", prop };
   }
 
   static serviceUnavailable() {
-    return `Service unavailable`;
+    return { type: "service_unavailable", prop: null };
   }
 }

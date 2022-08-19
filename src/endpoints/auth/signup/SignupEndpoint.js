@@ -13,7 +13,7 @@ export default {
     email: {
       in: ["body"],
       isEmail: {
-        errorMessage: ErrorMessages.invalid("Email"),
+        errorMessage: ErrorMessages.invalid("email"),
       },
       normalizeEmail: true,
       trim: true,
@@ -21,14 +21,14 @@ export default {
     name: {
       in: ["body"],
       isLength: {
-        errorMessage: ErrorMessages.invalid("Name Length"),
+        errorMessage: ErrorMessages.invalid("name"),
         options: { min: 1, max: 100 },
       },
     },
     password: {
       in: ["body"],
       isLength: {
-        errorMessage: ErrorMessages.invalid("Password Length"),
+        errorMessage: ErrorMessages.invalid("password"),
         options: { min: 8, max: 50 },
       },
       trim: true,

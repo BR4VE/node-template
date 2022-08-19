@@ -10,7 +10,7 @@ export default class SendResetPasswordEmailController {
     const user = await UserModel.findOneByEmail(email);
 
     if (!user) {
-      throw new BadRequestError(ErrorMessages.invalid("Email"));
+      throw new BadRequestError(ErrorMessages.invalid("email"));
     }
     await VerificationModel.deleteUnverifiedVerifications(user, "password");
     await VerificationService.create(user, "password");

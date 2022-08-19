@@ -22,7 +22,8 @@ export default async (error, req, res, next) => {
 
   const { status } = err;
   request.status(status).respondJSON(null, {
-    code: err.code,
-    message: err.message || "",
+    code: err.code ?? null,
+    type: err.type,
+    prop: err.prop,
   });
 };

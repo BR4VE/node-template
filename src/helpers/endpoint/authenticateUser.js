@@ -13,7 +13,7 @@ export default function authenticateUser(req, res, next) {
       }
 
       if (!user && info) {
-        next(new BadRequestError(ErrorMessages.invalid("Auth Token")));
+        next(new BadRequestError(ErrorMessages.invalid("authToken")));
         return;
       }
 

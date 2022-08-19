@@ -11,7 +11,7 @@ export default {
     email: {
       in: ["body"],
       isEmail: {
-        errorMessage: ErrorMessages.invalid("Email"),
+        errorMessage: ErrorMessages.invalid("email"),
       },
       normalizeEmail: true,
       trim: true,

@@ -11,7 +11,7 @@ export default {
     email: {
       in: ["body"],
       isEmail: {
-        errorMessage: ErrorMessages.invalid("Email"),
+        errorMessage: ErrorMessages.invalid("email"),
       },
       normalizeEmail: true,
       trim: true,
@@ -19,7 +19,7 @@ export default {
     password: {
       in: ["body"],
       notEmpty: {
-        errorMessage: ErrorMessages.required("Password"),
+        errorMessage: ErrorMessages.required("password"),
       },
       trim: true,
     },

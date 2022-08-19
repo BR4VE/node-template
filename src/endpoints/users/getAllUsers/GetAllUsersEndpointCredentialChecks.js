@@ -10,7 +10,7 @@ function canUserSort(request) {
   }
 
   if (!user.admin) {
-    throw new ForbiddenError(ErrorMessages.notAuthorized("Sort"));
+    throw new ForbiddenError(ErrorMessages.notAuthorized("sort"));
   }
 }
 

@@ -7,7 +7,7 @@ export default {
     options: (phoneNumber) => {
       const isPhoneNumber = Validator.validatePhoneNumber(phoneNumber);
       if (!isPhoneNumber) {
-        throw new BadRequestError(ErrorMessages.invalid("PhoneNumber"));
+        throw new BadRequestError(ErrorMessages.invalid("phoneNumber"));
       }
       return phoneNumber;
     },

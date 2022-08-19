@@ -12,7 +12,7 @@ export default class ResetPasswordEndpointController {
     const user = await UserModel.findOneByEmail(email);
 
     if (!user) {
-      throw new AuthError(ErrorMessages.invalid("Email"));
+      throw new AuthError(ErrorMessages.invalid("email"));
     }
 
     const verification = await VerificationModel.findActiveVerification(
@@ -21,11 +21,11 @@ export default class ResetPasswordEndpointController {
     );
 
     if (!verification) {
-      throw new NotFoundError(ErrorMessages.notExists("Verification"));
+      throw new NotFoundError(ErrorMessages.notExists("verification"));
     }
 
     if (verification.code !== verificationCode) {
-      throw new ValidationError(ErrorMessages.invalid("Verification Code"));
+      throw new ValidationError(ErrorMessages.invalid("verificationCode"));
     }
 
     await Promise.all([

@@ -10,7 +10,7 @@ export default class LoginEndpointController {
     const user = await UserModel.findOneByEmail(email);
 
     if (!user) {
-      throw new AuthError(ErrorMessages.invalid("Email or Password"));
+      throw new AuthError(ErrorMessages.invalid("email-or-password"));
     }
 
     const isPasswordCorrect = await UserService.comparePasswords(
@@ -19,7 +19,7 @@ export default class LoginEndpointController {
     );
 
     if (!isPasswordCorrect) {
-      throw new AuthError(ErrorMessages.invalid("Email or Password"));
+      throw new AuthError(ErrorMessages.invalid("email-or-password"));
     }
 
     const authenticationToken = JWTManager.signUserToken(user);

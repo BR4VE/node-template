@@ -11,7 +11,7 @@ export default {
     email: {
       in: ["body"],
       isEmail: {
-        errorMessage: ErrorMessages.invalid("Email"),
+        errorMessage: ErrorMessages.invalid("email"),
       },
       normalizeEmail: true,
       trim: true,
@@ -19,7 +19,7 @@ export default {
     password: {
       in: ["body"],
       isLength: {
-        errorMessage: ErrorMessages.invalid("Password Length"),
+        errorMessage: ErrorMessages.invalid("password"),
         options: { min: 8, max: 50 },
       },
       trim: true,
@@ -27,7 +27,7 @@ export default {
     verificationCode: {
       in: ["body"],
       isLength: {
-        errorMessage: ErrorMessages.invalid("Verification Code"),
+        errorMessage: ErrorMessages.invalid("verificationCode"),
         options: { min: 3, max: 50 },
       },
       trim: true,

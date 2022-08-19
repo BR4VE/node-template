@@ -11,7 +11,7 @@ export default class SignupEndpointController {
     const existingUser = await UserModel.findOneByEmail(email);
 
     if (existingUser) {
-      throw new ConflictError(ErrorMessages.alreadyExists("User"));
+      throw new ConflictError(ErrorMessages.alreadyExists("user"));
     }
 
     await UserService.createUser({
