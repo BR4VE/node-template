@@ -12,8 +12,9 @@ class JWTManager {
   signUserToken(user) {
     const payload = { userId: user._id, createdAt: new Date().toISOString() };
     const options = { expiresIn: YEAR_AS_SECONDS };
+    const userTokenSecret = Environment.get("userTokenSecret");
 
-    return this.api.sign(payload, Environment.userTokenSecret, options);
+    return this.api.sign(payload, userTokenSecret, options);
   }
 }
 

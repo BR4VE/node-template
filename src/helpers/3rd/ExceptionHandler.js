@@ -7,7 +7,7 @@ class ExceptionHandler {
     this.api = api;
 
     this.api.init({
-      dsn: Environment.exceptionHandlerUrl,
+      dsn: Environment.get("exceptionHandlerUrl"),
       tracesSampleRate: 1.0,
     });
   }

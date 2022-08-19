@@ -5,7 +5,8 @@ import LoggerService from "services/LoggerService";
 import WebServer from "server/WebServer";
 
 const server = http.createServer(WebServer());
+const apiPort = Environment.get("apiPort");
 
-server.listen(Environment.apiPort, () => {
-  LoggerService.logToConsole(`Listening ${Environment.apiPort} port.`);
+server.listen(apiPort, () => {
+  LoggerService.logToConsole(`Listening ${apiPort} port.`);
 });

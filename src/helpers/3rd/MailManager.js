@@ -23,7 +23,8 @@ class MailManager {
     this.api = api;
 
     if (Environment.isProduction()) {
-      this.api.setApiKey(Environment.mailServiceAPIKey);
+      const mailServiceAPIKey = Environment.get("mailServiceAPIKey");
+      this.api.setApiKey(mailServiceAPIKey);
     }
   }
 
