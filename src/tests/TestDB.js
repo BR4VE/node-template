@@ -50,6 +50,10 @@ class TestDB {
     await Promise.all(promises);
   }
 
+  async getDBUri() {
+    return this.memoryServer.getUri();
+  }
+
   getTestData() {
     return this.testData;
   }

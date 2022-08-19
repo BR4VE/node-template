@@ -1,7 +1,10 @@
+import Environment from "infra/Environment";
+
 export default function httpsRedirect() {
   return (request, response, next) => {
     if (
-      request.hostname === "localhost" ||
+      Environment.isDev() ||
+      Environment.isTest() ||
       request.secure ||
       request.headers["x-forwarded-proto"] === "https"
     ) {

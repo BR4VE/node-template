@@ -11,6 +11,10 @@ class DB {
   }
 
   async connect() {
+    if (this.isConnected()) {
+      return;
+    }
+
     try {
       await this.dbApi.connect(this.dbUri, {
         useCreateIndex: true,
@@ -25,6 +29,10 @@ class DB {
 
     LoggerService.logToConsole("Connected to DB.");
   }
+
+  isConnected() {
+    return this?.dbApi?.connection?.readyState === 1;
+  }
 }
 
-export default new DB(Environment.dbUri, mongoose);
+export default new DB(Environment.get("dbUri"), mongoose);
