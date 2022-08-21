@@ -12,7 +12,7 @@ export default class ErrorMessages {
   }
 
   static notExists(prop) {
-    return { type: "not_exist", prop };
+    return { type: "not_exists", prop };
   }
 
   static required(prop) {
