@@ -49,7 +49,11 @@ class Request {
   }
 
   respond() {
-    this._response.status(this._status).end();
+    this._response.status(this._status).json({
+      data: null,
+      error: null,
+      status: this._status,
+    });
     this.log("success");
   }
 
