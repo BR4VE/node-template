@@ -3,8 +3,10 @@ import request from "supertest";
 import JWTManager from "helpers/3rd/JWTManager";
 import WebServer from "server/WebServer";
 
-export default async (endpoint, data = {}) => {
-  const query = request(WebServer())?.[endpoint.method](`/api${endpoint.path}`);
+export default async (endpoint, data = {}, path = "") => {
+  const query = request(WebServer())?.[endpoint.method](
+    `/api${endpoint.path}${path}`
+  );
 
   const payload = { ...data };
 
