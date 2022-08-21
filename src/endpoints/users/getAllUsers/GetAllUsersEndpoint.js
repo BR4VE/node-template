@@ -15,6 +15,7 @@ export default {
         options: [["name", "createdAt"]],
         errorMessage: ErrorMessages.invalid("sort"),
       },
+      optional: { options: { nullable: true } },
     },
   },
 };
