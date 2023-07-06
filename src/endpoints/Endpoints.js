@@ -6,6 +6,8 @@ import SignupEndpoint from "endpoints/auth/signup/SignupEndpoint";
 
 // User
 import GetAllUsersEndpoint from "endpoints/users/getAllUsers/GetAllUsersEndpoint";
+import GetMeEndpoint from "endpoints/users/getMe/GetMeEndpoint";
+import UpdateUserEndpoint from "endpoints/users/updateUser/UpdateUserEndpoint";
 
 import getEndpointMiddlewares from "helpers/endpoint/getEndpointMiddlewares";
 
@@ -24,6 +26,8 @@ class Endpoints {
 
     // User
     this._setEndpoint(GetAllUsersEndpoint);
+    this._setEndpoint(GetMeEndpoint);
+    this._setEndpoint(UpdateUserEndpoint);
   }
 
   _setEndpoint(endpoint) {
