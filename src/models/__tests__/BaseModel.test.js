@@ -6,6 +6,7 @@ const AllPublicFields = { firstName: true, lastName: true, code: true };
 const ReturnFields = { firstName: true, lastName: true };
 const EntitySchema = mongoose.Schema(
   {
+    deleted: { type: Boolean, default: false },
     firstName: { type: String, default: null },
     lastName: { type: String, default: null },
     code: { type: Number, default: null },
@@ -17,9 +18,17 @@ const EntityModel = new BaseModel({
   publicFields: AllPublicFields,
   returnFields: ReturnFields,
 });
+const DeletedEntity = { firstName: "John", lastName: "Doe", code: 456 };
 const TestEntity = { firstName: "Mert", lastName: "Btmz", code: 123 };
 
 describe("BaseModel", () => {
+  beforeAll(async () => {
+    const entity = await EntityModel.create(DeletedEntity);
+    await EntityModel.model.updateOne({ _id: entity._id }, { deleted: true });
+
+    DeletedEntity._id = entity._id;
+  });
+
   test("Creates", async () => {
     const entity = await EntityModel.create(TestEntity);
 
@@ -28,6 +37,23 @@ describe("BaseModel", () => {
     expect(entity.code).toBe(TestEntity.code);
 
     TestEntity._id = entity._id;
+  });
+
+  test("Finds most recent one by and returns fields", async () => {
+    const data = { ...TestEntity };
+    delete data._id;
+
+    const entity = await EntityModel.create(data);
+    const mostRecentOne = await EntityModel.findMostRecentOneBy({
+      firstName: TestEntity.firstName,
+    });
+    const entityFields = Object.keys(mostRecentOne.toObject());
+
+    expect(mostRecentOne._id).toEqual(entity._id);
+    expect(entityFields).toEqual([...Object.keys(ReturnFields), "_id"]);
+
+    // Cleanup
+    await EntityModel.model.deleteOne({ _id: mostRecentOne._id });
   });
 
   test("Finds one by and returns fields", async () => {
@@ -75,12 +101,48 @@ describe("BaseModel", () => {
     });
   });
 
+  test("Does not find deleted files", async () => {
+    const results = await Promise.all([
+      EntityModel.findOneBy({ firstName: DeletedEntity.firstName }),
+      EntityModel.findOneById(DeletedEntity._id),
+      EntityModel.findOneByIdAndUpdate(DeletedEntity._id, { deleted: false }),
+    ]);
+    const resultArr = await EntityModel.findManyBy({
+      firstName: DeletedEntity.firstName,
+    });
+
+    expect(resultArr).toHaveLength(0);
+    results.forEach((result) => expect(result).toBe(null));
+  });
+
   test("Gets return fields", async () => {
     const returnFields = EntityModel.getReturnFields();
     const allPublicFields = EntityModel.getReturnFields({ code: true });
 
     expect(returnFields).toEqual(ReturnFields);
     expect(allPublicFields).toEqual(AllPublicFields);
+  });
+
+  test("Increases/decreases key by id", async () => {
+    const entity = await EntityModel.findOneById(TestEntity._id, {
+      code: true,
+    });
+    const key = "code";
+    const count = 3;
+
+    const increasedEntity = await EntityModel.increaseKeyById(
+      entity._id,
+      key,
+      count
+    );
+    const decreasedEntity = await EntityModel.increaseKeyById(
+      entity._id,
+      key,
+      -count
+    );
+
+    expect(increasedEntity[key]).toBe(entity[key] + count);
+    expect(decreasedEntity[key]).toBe(entity[key]);
   });
 
   test("Updates one by id", async () => {
