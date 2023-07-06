@@ -1,8 +1,8 @@
 import DateUtils from "helpers/utils/DateUtils";
 import EventEmitter, { EventTypes } from "helpers/EventEmitter";
+import MailService from "services/MailService";
 import TokenService from "helpers/3rd/TokenManager";
 import VerificationModel from "models/VerificationModel";
-import MailManager from "helpers/3rd/MailManager";
 
 class VerificationService {
   static async create(user, type = "email") {
@@ -17,10 +17,11 @@ class VerificationService {
       userId,
     });
 
-    await MailManager.sendVerificationEmail(type, email, {
-      userName: user.name,
-      verificationUrl: "https://google.com",
-      // TODO: change verification url later
+    await MailService.sendMail({
+      data: { verificationCode: code },
+      toEmail: email,
+      type: "verification",
+      userId,
     });
 
     return verification;
