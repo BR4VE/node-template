@@ -1,12 +1,12 @@
-import cors from "cors";
-import express from "express";
-import helmet from "helmet";
-
 import DB from "infra/DB";
 import Endpoints from "endpoints/Endpoints";
+import Scheduler from "scheduler/Scheduler";
 
 import configPassport from "helpers/endpoint/configPassport";
+import cors from "cors";
 import errorHandler from "middlewares/errorHandler";
+import express from "express";
+import helmet from "helmet";
 import httpsRedirect from "middlewares/httpsRedirect";
 
 class Server {
@@ -25,6 +25,7 @@ class Server {
     this.setRouter();
     this.setEndpoints();
     this.setErrorHandler();
+    this.setScheduler();
   }
 
   configApp() {
@@ -54,6 +55,11 @@ class Server {
 
   setErrorHandler() {
     this.app.use(errorHandler);
+  }
+
+  setScheduler() {
+    this.scheduler = new Scheduler([]);
+    this.scheduler.run();
   }
 }
 
