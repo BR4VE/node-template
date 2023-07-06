@@ -12,6 +12,24 @@ class ArrayUtils {
     return target.reduce((keys, element) => [...keys, element?.[key]], []);
   }
 
+  static groupify(arrayOfObjects, key) {
+    const map = {};
+
+    arrayOfObjects.forEach((object) => {
+      if (!object[key]) {
+        return;
+      }
+
+      const value = String(object[key]);
+      if (!map[value]) {
+        map[value] = [];
+      }
+      map[value].push(object);
+    });
+
+    return map;
+  }
+
   static mapify(arrayOfObjects, key) {
     const map = {};
     arrayOfObjects.forEach((object) => {

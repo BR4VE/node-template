@@ -13,6 +13,14 @@ class Request {
     return { ...body, ...params, ...query };
   }
 
+  getHost() {
+    return Environment.isTest() ? "localhost" : this.getRequest().headers.host;
+  }
+
+  getMiddlewareData() {
+    return this.getRequest()._middlewareData;
+  }
+
   getPath() {
     return this.getRequest().path;
   }
@@ -41,6 +49,14 @@ class Request {
       status: this._status,
       userId: user?._id,
     });
+  }
+
+  setMiddlewareData(obj) {
+    const request = this.getRequest();
+    request._middlewareData = {
+      ...request._middlewareData,
+      ...obj,
+    };
   }
 
   status(status) {

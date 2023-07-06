@@ -1,6 +1,18 @@
 import ObjectUtils from "helpers/utils/ObjectUtils";
 
 describe("ObjectUtils", () => {
+  test("Clones with defined props", () => {
+    const obj = { name: "John", lastName: "Doe", number: 10 };
+    const props = ["name", "lastName", "city"];
+
+    const clone = ObjectUtils.cloneWithDefinedProps(obj, props);
+
+    expect(clone.name).toBe(obj.name);
+    expect(clone.lastName).toBe(obj.lastName);
+    expect(clone.city).not.toBeDefined();
+    expect(clone.number).not.toBeDefined();
+  });
+
   test("Filters object fields", () => {
     const target = { firstName: "first", lastName: "last", code: null };
     const source = { firstName: "name", code: 123 };

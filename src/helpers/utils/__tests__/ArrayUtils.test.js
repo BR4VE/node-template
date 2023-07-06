@@ -29,6 +29,37 @@ describe("ArrayUtils", () => {
     expect(keys).toEqual(["john", "doe", null, undefined]);
   });
 
+  test("Groupifies", () => {
+    const objects = [
+      {
+        type: 1,
+        group: "bar",
+      },
+      {
+        type: 1,
+        group: "bae",
+      },
+      {
+        type: 2,
+        group: "bae",
+      },
+    ];
+
+    const groupByType = ArrayUtils.groupify(objects, "type");
+    const groupByGroup = ArrayUtils.groupify(objects, "group");
+    const groupByBar = ArrayUtils.groupify(objects, "bar");
+
+    expect(groupByType).toEqual({
+      1: [objects[0], objects[1]],
+      2: [objects[2]],
+    });
+    expect(groupByGroup).toEqual({
+      bar: [objects[0]],
+      bae: [objects[1], objects[2]],
+    });
+    expect(groupByBar).toEqual({});
+  });
+
   test("Mapifies", () => {
     const arrayOfObjects = [{ name: "john" }, { name: "doe" }, { name: null }];
 
